@@ -23,6 +23,9 @@ jobs:
       - name: Test per-source compiler language selection
         run: python -m unittest discover -s tools/tests -p 'test_configure.py'
 
+      - name: Test macOS platform and compiler wrapper
+        run: python -m unittest discover -s tools/tests -p 'test_macos.py'
+
       - name: Cache pre-commit hooks
         uses: actions/cache@v6
         with:
