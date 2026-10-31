@@ -177,6 +177,18 @@ src/auto/NNSi_G3dGetJointScaleMaya.c:
     complete
     .text       start:0x01ffd178 end:0x01ffd2c8
 
+src/auto/MIi_DmaSetParams.c:
+    complete
+    .text       start:0x01ffd488 end:0x01ffd4c8
+
 src/auto/func_01ffd4c8.c:
     complete
     .text       start:0x01ffd4c8 end:0x01ffd538
+
+src/auto/MIi_DmaSetParams_noInt.c:
+    complete
+    .text       start:0x01ffd538 end:0x01ffd55c
+
+src/auto/MIi_DmaSetParams_wait_noInt.c:
+    complete
+    .text       start:0x01ffd55c end:0x01ffd5c0
