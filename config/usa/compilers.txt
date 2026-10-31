@@ -330,3 +330,4 @@ src/auto/FSi_GetPathCommand.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noa
 src/auto/MIi_DmaSetParams.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/MIi_DmaSetParams_noInt.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/MIi_DmaSetParams_wait_noInt.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/func_020d9da4.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto

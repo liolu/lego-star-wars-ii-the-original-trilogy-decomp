@@ -9386,6 +9386,10 @@ src/auto/MBi_CommCallParentError.c:
     complete
     .text       start:0x020d9c70 end:0x020d9c88
 
+src/auto/func_020d9da4.c:
+    complete
+    .text       start:0x020d9da4 end:0x020da200
+
 src/auto/MBi_ReadSegmentHeader.c:
     complete
     .text       start:0x020da200 end:0x020da278
@@ -11092,6 +11096,10 @@ src/auto/func_020be930.c:
 src/auto/func_020be9f8.c:
     complete
     .text       start:0x020be9f8 end:0x020bea10
+
+src/auto/func_020bea10.c:
+    complete
+    .text       start:0x020bea10 end:0x020bec84
 
 src/auto/func_020bec84.c:
     complete
