@@ -4898,6 +4898,10 @@ src/auto/func_02070c90.c:
     complete
     .text       start:0x02070c90 end:0x02070ca0
 
+src/auto/func_02070ca0.c:
+    complete
+    .text       start:0x02070ca0 end:0x02070dd0
+
 src/auto/func_02070dd0.c:
     complete
     .text       start:0x02070dd0 end:0x02070dfc
