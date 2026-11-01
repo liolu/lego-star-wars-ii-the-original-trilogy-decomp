@@ -15615,6 +15615,10 @@ src/auto/RecycleRegion.c:
 src/auto/func_0206fe00.c:
     complete
     .text       start:0x0206fe00 end:0x0206ff64
+src/auto/func_0209aaa4.c:
+    complete
+    .text       start:0x0209aaa4 end:0x0209adb4
+
 src/auto/func_0209adb4.c:
     complete
     .text       start:0x0209adb4 end:0x0209ae80
