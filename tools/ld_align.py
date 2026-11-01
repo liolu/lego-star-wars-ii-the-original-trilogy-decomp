@@ -15,7 +15,7 @@ OS code loads from its literal pool) right after `SECTIONS {`.
 Then it runs the linker command with the lcf / @objects arguments replaced. Nothing to do -> runs it unchanged.
 Inputs are never modified (no ninja dirty loop).
 """
-import re, shutil, struct, subprocess, sys
+import bisect, re, shutil, struct, subprocess, sys
 from pathlib import Path
 
 
@@ -86,7 +86,7 @@ def main():
     # {object: {section: alignment}}: .text halfword objects above, plus data objects (one object per odd/halfword
     # .bss/.data/.rodata symbol, e.g. a `struct { u8 b[N]; }` at an odd address) whose range starts off 4
     aligns = {o: {'.text': 2} for o in need}
-    for sec in ('.data', '.rodata', '.bss', '.sbss'):
+    for sec in ('.data', '.rodata', '.bss', '.sbss', '.exception', '.exceptix', '.ctor'):
         for o, (s, e) in ranges(sec).items():
             if s % 4:
                 aligns.setdefault(o, {})[sec] = 2 if s % 2 == 0 else 1
@@ -95,6 +95,30 @@ def main():
              if l.strip() and not l.strip().startswith('#')] if symfile.exists() else []
     if not aligns and not extra:
         sys.exit(subprocess.call(cmd))
+    # a symbol inside a data object (struct field named by matched C, prototypes/fieldgap.py) goes right after that
+    # object in the lcf: mwld binds an absolute symbol set outside a section to an arbitrary one (dsd check symbols)
+    # overlays share addresses: only the objects of the symbol's overlay (ovNNN_data_X.o, data_ovNNN_X) are looked at
+    inner, spans = {}, {}
+    for sec in ('.data', '.rodata', '.bss', '.sbss', '.exception', '.exceptix', '.ctor'):
+        for o, (s, e) in ranges(sec).items():
+            tag = re.match(r'ov\d+(?=_)', o)
+            spans.setdefault(tag[0] if tag else '', []).append((s, e, o, sec))
+    for v in spans.values():
+        v.sort()
+    outer = []
+    for x in extra:
+        v = re.fullmatch(r'(\S+)\s*=\s*0x([0-9a-fA-F]+);', x)
+        hit = None
+        if v:
+            ad, tag = int(v.group(2), 16), re.search(r'_(ov\d+)_', v.group(1))
+            sp = spans.get(tag[1] if tag else '', [])
+            i = bisect.bisect_right(sp, (ad, 1 << 32)) - 1
+            hit = sp[i] if i >= 0 and sp[i][0] <= ad < sp[i][1] else None
+        if hit:
+            inner.setdefault((hit[2], hit[3]), []).append(x)
+        else:
+            outer.append(x)
+    extra = outer
     out = lcf.parent / 'ld_align'; out.mkdir(exist_ok=True)
     paths = [p.strip() for p in objfile.read_text(encoding='utf-8').splitlines() if p.strip()]
     new_paths = []
@@ -114,6 +138,8 @@ def main():
             new_lcf += [f'{m.group(1)}ALIGNALL({a});', l, f'{m.group(1)}ALIGNALL(4);']
         else:
             new_lcf.append(l)
+        if m and (m.group(2), m.group(3)) in inner:
+            new_lcf += [m.group(1) + x for x in inner[(m.group(2), m.group(3))]]
         if extra and l.strip() == 'SECTIONS {':
             new_lcf += ['    ' + x for x in extra]
             extra = []
