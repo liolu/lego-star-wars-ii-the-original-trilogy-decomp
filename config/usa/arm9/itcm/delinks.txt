@@ -1,10 +1,194 @@
     .text       start:0x01ff8000 end:0x01ffd5c0 kind:code align:32
     .bss        start:0x01ffd5c0 end:0x01ffd5c0 kind:bss align:32
 
+src/auto/func_01ff84a8.c:
+    complete
+    .text       start:0x01ff84a8 end:0x01ff84bc
+
+src/auto/func_01ff84bc.c:
+    complete
+    .text       start:0x01ff84bc end:0x01ff8874
+
+src/auto/func_01ff8874.cpp:
+    complete
+    .text       start:0x01ff8874 end:0x01ff8abc
+
+src/auto/func_01ff90a8.c:
+    complete
+    .text       start:0x01ff90a8 end:0x01ff90f8
+
+src/auto/func_01ff90f8.cpp:
+    complete
+    .text       start:0x01ff90f8 end:0x01ff9188
+
+src/auto/func_01ff9d4c.c:
+    complete
+    .text       start:0x01ff9d4c end:0x01ff9e38
+
+src/auto/func_01ff9e38.c:
+    complete
+    .text       start:0x01ff9e38 end:0x01ff9f20
+
+src/auto/func_01ff9f20.c:
+    complete
+    .text       start:0x01ff9f20 end:0x01ffa188
+
+src/auto/func_01ffa188.c:
+    complete
+    .text       start:0x01ffa188 end:0x01ffa338
+
+src/auto/func_01ffa338.c:
+    complete
+    .text       start:0x01ffa338 end:0x01ffa408
+
+src/auto/func_01ffa408.c:
+    complete
+    .text       start:0x01ffa408 end:0x01ffa41c
+
+src/auto/func_01ffa41c.c:
+    complete
+    .text       start:0x01ffa41c end:0x01ffa430
+
+src/auto/func_01ffa430.c:
+    complete
+    .text       start:0x01ffa430 end:0x01ffa478
+
+src/auto/func_01ffa478.c:
+    complete
+    .text       start:0x01ffa478 end:0x01ffa494
+
+src/auto/func_01ffa494.c:
+    complete
+    .text       start:0x01ffa494 end:0x01ffa520
+
+src/auto/func_01ffa958.c:
+    complete
+    .text       start:0x01ffa958 end:0x01ffa9e8
+
+src/auto/func_01ffabe4.c:
+    complete
+    .text       start:0x01ffabe4 end:0x01ffac98
+
+src/auto/func_01ffac98.c:
+    complete
+    .text       start:0x01ffac98 end:0x01ffad38
+
+src/auto/func_01ffad38.c:
+    complete
+    .text       start:0x01ffad38 end:0x01ffaf7c
+
+src/auto/func_01ffaf7c.c:
+    complete
+    .text       start:0x01ffaf7c end:0x01ffb350
+
+src/auto/G3d_InitRenderState.c:
+    complete
+    .text       start:0x01ffb398 end:0x01ffb514
+
+src/auto/updateHintVec_.c:
+    complete
+    .text       start:0x01ffb514 end:0x01ffb57c
+
+src/auto/NNS_G3dDraw.c:
+    complete
+    .text       start:0x01ffb57c end:0x01ffb658
+
+src/auto/func_01ffb658.c:
+    complete
+    .text       start:0x01ffb658 end:0x01ffb680
+
+src/auto/func_01ffb680.c:
+    complete
+    .text       start:0x01ffb680 end:0x01ffb6a8
+
+src/auto/NNSi_G3dFuncSbc_NODE.c:
+    complete
+    .text       start:0x01ffb6a8 end:0x01ffb824
+
+src/auto/NNSi_G3dFuncSbc_MTX.c:
+    complete
+    .text       start:0x01ffb824 end:0x01ffb8f0
+
+src/auto/func_01ffb8f0.c:
+    complete
+    .text       start:0x01ffb8f0 end:0x01ffbd40
+
+src/auto/func_01ffbd40.c:
+    complete
+    .text       start:0x01ffbd40 end:0x01ffbdc0
+
 src/auto/NNSi_G3dFuncSbc_SHP_InternalDefault.c:
     complete
     .text       start:0x01ffbdc0 end:0x01ffbe94
 
+src/auto/func_01ffbe94.c:
+    complete
+    .text       start:0x01ffbe94 end:0x01ffbf00
+
+src/auto/func_01ffbf00.c:
+    complete
+    .text       start:0x01ffbf00 end:0x01ffc368
+
+src/auto/NNSi_G3dFuncSbc_POSSCALE.c:
+    complete
+    .text       start:0x01ffc368 end:0x01ffc3d8
+
+src/auto/NNS_G3dGeFlushBuffer.c:
+    complete
+    .text       start:0x01ffc3d8 end:0x01ffc438
+
 src/auto/func_01ffc450.c:
     complete
     .text       start:0x01ffc450 end:0x01ffc45c
+
+src/auto/NNSi_G3dAnmCalcNsBca.c:
+    complete
+    .text       start:0x01ffc534 end:0x01ffc570
+
+src/auto/getJntSRTAnmResult_.c:
+    complete
+    .text       start:0x01ffc570 end:0x01ffc924
+
+src/auto/getTransData_.c:
+    complete
+    .text       start:0x01ffc924 end:0x01ffca84
+
+src/auto/getRotData_.c:
+    complete
+    .text       start:0x01ffca84 end:0x01ffce8c
+
+src/auto/getRotDataByIdx_.c:
+    complete
+    .text       start:0x01ffce8c end:0x01ffcff8
+
+src/auto/NNSi_G3dSendJointSRTBasic.c:
+    complete
+    .text       start:0x01ffcff8 end:0x01ffd074
+
+src/auto/NNSi_G3dGetJointScaleBasic.c:
+    complete
+    .text       start:0x01ffd074 end:0x01ffd0b4
+
+src/auto/NNSi_G3dSendJointSRTMaya.c:
+    complete
+    .text       start:0x01ffd0b4 end:0x01ffd178
+
+src/auto/NNSi_G3dGetJointScaleMaya.c:
+    complete
+    .text       start:0x01ffd178 end:0x01ffd2c8
+
+src/auto/MIi_DmaSetParams.c:
+    complete
+    .text       start:0x01ffd488 end:0x01ffd4c8
+
+src/auto/func_01ffd4c8.c:
+    complete
+    .text       start:0x01ffd4c8 end:0x01ffd538
+
+src/auto/MIi_DmaSetParams_noInt.c:
+    complete
+    .text       start:0x01ffd538 end:0x01ffd55c
+
+src/auto/MIi_DmaSetParams_wait_noInt.c:
+    complete
+    .text       start:0x01ffd55c end:0x01ffd5c0

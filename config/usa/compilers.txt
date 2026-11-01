@@ -305,6 +305,30 @@ src/auto/func_020e0ad4.c 2.0/sp1p5 -O2,p
 src/auto/func_020ae63c.c 2.0/sp1p5 -O2
 src/auto/func_020affbc.c 2.0/sp1p5 -O2
 src/auto/func_020bd534.c 2.0/sp1p5 -O2
+src/auto/NNSi_G3dAnmCalcNsBca.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/NNSi_G3dGetJointScaleBasic.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/NNS_G3dGeFlushBuffer.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/updateHintVec_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/NNSi_G3dFuncSbc_POSSCALE.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/NNSi_G3dSendJointSRTBasic.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/NNSi_G3dSendJointSRTMaya.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/NNSi_G3dFuncSbc_MTX.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/NNS_G3dDraw.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/NNSi_G3dGetJointScaleMaya.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/getMdlRot_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/getTransData_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/getRotDataByIdx_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/G3d_InitRenderState.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/NNSi_G3dFuncSbc_NODE.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/FSi_FindPathCommand.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/getRotData_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/getJntSRTAnmResult_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/NNSi_G3dFuncSbc_NODEMIX.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/FSi_GetPathCommand.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/MIi_DmaSetParams.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/MIi_DmaSetParams_noInt.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/MIi_DmaSetParams_wait_noInt.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/func_020d9da4.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/donor/getRotDataEx_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/donor/func_020d403c.c 2.0/sp1p5
 src/donor/MB_RegisterFile.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
