@@ -82,6 +82,10 @@ src/auto/func_02001d04.c:
     complete
     .text       start:0x02001d04 end:0x02001d20
 
+src/auto/func_020029c4.cpp:
+    complete
+    .text       start:0x020029c4 end:0x02003668
+
 src/auto/func_02003668.c:
     complete
     .text       start:0x02003668 end:0x020036c4
