@@ -21687,3 +21687,55 @@ src/data/main_data_021018c8.c:
 src/data/main_data_021018cc.c:
     complete
     .data       start:0x021018cc end:0x021018d0
+
+src/auto/MIi_CpuClear32.c:
+    complete
+    .text       start:0x020cf1d8 end:0x020cf1f0
+
+src/auto/RtcCommonCallback.c:
+    complete
+    .text       start:0x020d4618 end:0x020d4b68
+
+src/auto/CARDi_TryReadCardDma.c:
+    complete
+    .text       start:0x020d58f4 end:0x020d5a54
+
+src/auto/__exit.c:
+    complete
+    .text       start:0x020de188 end:0x020de2b0
+
+src/donor/func_020c5738.c:
+    complete
+    .text       start:0x020c5738 end:0x020c5a4c
+
+src/donor/getRotDataEx_.c:
+    complete
+    .text       start:0x020c6e2c end:0x020c7160
+
+src/donor/func_020d403c.c:
+    complete
+    .text       start:0x020d403c end:0x020d426c
+
+src/donor/MB_RegisterFile.c:
+    complete
+    .text       start:0x020da278 end:0x020da508
+
+src/donor/MBi_SendFixedBeacon.c:
+    complete
+    .text       start:0x020daea8 end:0x020db00c
+
+src/donor/MBi_SendVolatBeacon.c:
+    complete
+    .text       start:0x020db03c end:0x020db2a8
+
+src/donor/MB_DisconnectChild.c:
+    complete
+    .text       start:0x020dcb08 end:0x020dcc94
+
+src/donor/double2hex.c:
+    complete
+    .text       start:0x020df4dc end:0x020df9b8
+
+src/donor/float2str.c:
+    complete
+    .text       start:0x020dfadc end:0x020e0240
