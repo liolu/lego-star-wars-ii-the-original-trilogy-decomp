@@ -15921,6 +15921,10 @@ src/auto/func_02028550.c:
 src/auto/FSi_NextCommand.c:
     complete
     .text       start:0x020d2088 end:0x020d229c
+src/auto/func_02016c38.cpp:
+    complete
+    .text       start:0x02016c38 end:0x02017310
+
 src/auto/func_02017310.c:
     complete
     .text       start:0x02017310 end:0x0201755c
