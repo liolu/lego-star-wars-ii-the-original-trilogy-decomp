@@ -1226,6 +1226,10 @@ src/auto/func_020252ec.c:
     complete
     .text       start:0x020252ec end:0x0202532c
 
+src/auto/func_02025bb0.cpp:
+    complete
+    .text       start:0x02025bb0 end:0x02026000
+
 src/auto/func_02026000.c:
     complete
     .text       start:0x02026000 end:0x02026004
