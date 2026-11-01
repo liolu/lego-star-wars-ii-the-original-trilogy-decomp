@@ -166,6 +166,10 @@ src/auto/func_02006ad0.c:
     complete
     .text       start:0x02006ad0 end:0x02006af8
 
+src/auto/func_02007408.cpp:
+    complete
+    .text       start:0x02007408 end:0x020075ec
+
 src/auto/func_020075ec.cpp:
     complete
     .text       start:0x020075ec end:0x02007914
