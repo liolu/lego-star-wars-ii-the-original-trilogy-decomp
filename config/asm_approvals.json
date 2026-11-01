@@ -62,5 +62,12 @@
         "approved_by": "User",
         "approval":
             "User, 2026-10-25, after being told func_02000938 was an ASM candidate needing approval: \"do waht u think is best and make a seperate branch + pr for asm\"."
+    },
+    "src/auto/MIi_CpuClear32.c": {
+        "sha256": "483523358042bfb21db7e97b9f2609fa840ec97114941f21fe602d833bbf1dac",
+        "reason":
+            "Same body as the approved func_02000938, at a second address: hand-written SDK word-fill loop with a predicated single-register stmltia with writeback and an ip end pointer, which mwcc never emits.",
+        "approved_by": "User",
+        "approval": "User, 2026-11-01, asked whether to add the approval for MIi_CpuClear32 and push it to main: \"oui\"."
     }
 }

@@ -320,14 +320,20 @@ src/auto/getTransData_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/getRotDataByIdx_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/G3d_InitRenderState.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/NNSi_G3dFuncSbc_NODE.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
-src/auto/MB_DisconnectChild.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/FSi_FindPathCommand.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/getRotData_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/getJntSRTAnmResult_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
-src/auto/getRotDataEx_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/NNSi_G3dFuncSbc_NODEMIX.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/FSi_GetPathCommand.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/MIi_DmaSetParams.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/MIi_DmaSetParams_noInt.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/MIi_DmaSetParams_wait_noInt.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/func_020d9da4.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/donor/getRotDataEx_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/donor/func_020d403c.c 2.0/sp1p5
+src/donor/MB_RegisterFile.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/donor/MBi_SendFixedBeacon.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/donor/MBi_SendVolatBeacon.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/donor/MB_DisconnectChild.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/donor/double2hex.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/donor/float2str.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto

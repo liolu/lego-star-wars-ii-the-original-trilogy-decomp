@@ -19,8 +19,8 @@ extern void func_020e16fc(decimal *result, long exp);
 extern void __ull2dec(decimal *result, unsigned long long x);
 extern void __timesdec(decimal *result, const decimal *x, const decimal *y);
 /* Runtime helpers still unnamed in symbols.txt: _dsub (a - b) and _ll_ufrom_d (double -> u64). */
-extern double func_020e256c(double a, double b);
-extern unsigned long long func_020e2124(double x);
+extern double _dsub(double a, double b);
+extern unsigned long long _ll_ufrom_d(double x);
 void func_020e1a80(decimal *d, double x);
 
 enum {
@@ -67,7 +67,7 @@ void func_020e1a80(decimal *d, double x) {
     }
 
     if (sgn) {
-        x = func_020e256c(0.0, x);
+        x = _dsub(0.0, x);
     }
 
     {
@@ -77,7 +77,7 @@ void func_020e1a80(decimal *d, double x) {
         decimal int_d, pow2_d;
 
         func_020e16fc(&pow2_d, exp - num_bits_extract);
-        __ull2dec(&int_d, func_020e2124(ldexp(frac, num_bits_extract)));
+        __ull2dec(&int_d, _ll_ufrom_d(ldexp(frac, num_bits_extract)));
         __timesdec(d, &int_d, &pow2_d);
         d->sgn = sgn;
     }
