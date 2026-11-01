@@ -2218,6 +2218,10 @@ src/auto/func_020470d0.c:
     complete
     .text       start:0x020470d0 end:0x020470e4
 
+src/auto/func_02047540.cpp:
+    complete
+    .text       start:0x02047540 end:0x020476d4
+
 src/auto/func_020476d4.c:
     complete
     .text       start:0x020476d4 end:0x02047714
