@@ -14818,6 +14818,10 @@ src/auto/func_020af7f4.cpp:
     complete
     .text       start:0x020af7f4 end:0x020af864
 
+src/auto/func_020bdd74.c:
+    complete
+    .text       start:0x020bdd74 end:0x020bdf38
+
 src/auto/func_020bdf38.cpp:
     complete
     .text       start:0x020bdf38 end:0x020bdfa8
