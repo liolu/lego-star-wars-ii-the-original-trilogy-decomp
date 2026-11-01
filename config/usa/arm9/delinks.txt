@@ -14510,6 +14510,10 @@ src/auto/func_020107c8.cpp:
     complete
     .text       start:0x020107c8 end:0x02010828
 
+src/auto/func_020122bc.cpp:
+    complete
+    .text       start:0x020122bc end:0x02012458
+
 src/auto/func_02012650.cpp:
     complete
     .text       start:0x02012650 end:0x0201270c
