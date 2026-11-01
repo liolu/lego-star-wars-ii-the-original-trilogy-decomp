@@ -305,7 +305,6 @@ src/auto/func_020e0ad4.c 2.0/sp1p5 -O2,p
 src/auto/func_020ae63c.c 2.0/sp1p5 -O2
 src/auto/func_020affbc.c 2.0/sp1p5 -O2
 src/auto/func_020bd534.c 2.0/sp1p5 -O2
-src/donor/func_020c5738.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/donor/getRotDataEx_.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/donor/func_020d403c.c 2.0/sp1p5
 src/donor/MB_RegisterFile.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto

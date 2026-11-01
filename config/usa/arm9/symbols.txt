@@ -4612,10 +4612,10 @@ _dmul kind:function(arm,size=0x364) addr:0x020e21f0
 _dsub kind:function(arm,size=0x3b4) addr:0x020e256c
 _dls kind:function(arm,size=0x84) addr:0x020e2920
 _deq kind:function(arm,size=0x74) addr:0x020e29a4
-func_020e2a18 kind:function(arm,size=0x1c0) addr:0x020e2a18
-.L_020e2a28 kind:label(arm) addr:0x020e2a28
+_ll_mod kind:function(arm,size=0x1c0) addr:0x020e2a18
+_ll_sdiv kind:label(arm) addr:0x020e2a28
 _ll_udiv kind:function(arm,size=0x48) addr:0x020e2bd8
-.L_020e2be4 kind:label(arm) addr:0x020e2be4
+_ull_mod kind:label(arm) addr:0x020e2be4
 _s32_div_f kind:function(arm,size=0x20c) addr:0x020e2c20
 _u32_div_f kind:function(arm,size=0x1e4) addr:0x020e2e2c
 .L_020e2e34 kind:label(arm) addr:0x020e2e34
