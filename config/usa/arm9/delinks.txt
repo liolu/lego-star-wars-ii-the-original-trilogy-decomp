@@ -1690,6 +1690,10 @@ src/auto/func_02032b30.c:
     complete
     .text       start:0x02032b30 end:0x02032b44
 
+src/auto/func_02032bd4.c:
+    complete
+    .text       start:0x02032bd4 end:0x0203309c
+
 src/auto/func_0203309c.cpp:
     complete
     .text       start:0x0203309c end:0x0203346c
@@ -2162,6 +2166,10 @@ src/auto/func_02045440.c:
     complete
     .text       start:0x02045440 end:0x020454cc
 
+src/auto/func_020454cc.cpp:
+    complete
+    .text       start:0x020454cc end:0x02045888
+
 src/auto/func_02045888.c:
     complete
     .text       start:0x02045888 end:0x020458a0
@@ -2197,6 +2205,10 @@ src/auto/func_0204657c.c:
 src/auto/func_020465b0.c:
     complete
     .text       start:0x020465b0 end:0x020465ec
+
+src/auto/func_02046e80.c:
+    complete
+    .text       start:0x02046e80 end:0x02047008
 
 src/auto/func_02047008.cpp:
     complete
@@ -5730,6 +5742,10 @@ src/auto/func_020896c4.cpp:
     complete
     .text       start:0x020896c4 end:0x020897f8
 
+src/auto/func_020897f8.c:
+    complete
+    .text       start:0x020897f8 end:0x02089a6c
+
 src/auto/func_02089a6c.c:
     complete
     .text       start:0x02089a6c end:0x02089a78
@@ -5777,6 +5793,10 @@ src/auto/func_0208b3f0.c:
 src/auto/func_0208b458.c:
     complete
     .text       start:0x0208b458 end:0x0208b4f8
+
+src/auto/func_0208bbd8.c:
+    complete
+    .text       start:0x0208bbd8 end:0x0208bf58
 
 src/auto/func_0208bf58.c:
     complete
@@ -10829,6 +10849,10 @@ src/auto/func_0205eb98.c:
     complete
     .text       start:0x0205eb98 end:0x0205ebd4
 
+src/auto/func_02063468.c:
+    complete
+    .text       start:0x02063468 end:0x02063510
+
 src/auto/func_02063510.c:
     complete
     .text       start:0x02063510 end:0x0206353c
@@ -11012,6 +11036,10 @@ src/auto/func_0201c778.c:
 src/auto/func_02027124.c:
     complete
     .text       start:0x02027124 end:0x02027240
+
+src/auto/func_02027240.c:
+    complete
+    .text       start:0x02027240 end:0x020272cc
 
 src/auto/func_020272cc.c:
     complete
@@ -11540,6 +11568,10 @@ src/auto/func_02053964.c:
 src/auto/func_02086740.c:
     complete
     .text       start:0x02086740 end:0x020867a4
+
+src/auto/func_0209468c.cpp:
+    complete
+    .text       start:0x0209468c end:0x020948c0
 
 src/auto/func_020948c0.c:
     complete
@@ -12969,6 +13001,10 @@ src/auto/func_02063324.c:
     complete
     .text       start:0x02063324 end:0x020633dc
 
+src/auto/func_0206353c.cpp:
+    complete
+    .text       start:0x0206353c end:0x02063588
+
 src/auto/func_02063588.c:
     complete
     .text       start:0x02063588 end:0x02063610
@@ -13500,6 +13536,10 @@ src/auto/func_02026f88.c:
 src/auto/func_0204fa60.c:
     complete
     .text       start:0x0204fa60 end:0x0204ff60
+
+src/auto/func_0204ff60.c:
+    complete
+    .text       start:0x0204ff60 end:0x020502c8
 
 src/auto/func_020502c8.c:
     complete
@@ -15459,6 +15499,10 @@ src/auto/func_020bee2c.c:
     complete
     .text       start:0x020bee2c end:0x020bef7c
 
+src/auto/func_020bf198.c:
+    complete
+    .text       start:0x020bf198 end:0x020bf250
+
 src/auto/func_020bf250.c:
     complete
     .text       start:0x020bf250 end:0x020bf2e0
@@ -15704,6 +15748,10 @@ src/auto/NNSi_G3dGetTexPatAnmFV.c:
 src/auto/OS_WaitIrq.c:
     complete
     .text       start:0x020cc828 end:0x020cc89c
+src/auto/func_0201b614.c:
+    complete
+    .text       start:0x0201b614 end:0x0201bb68
+
 src/auto/IC_InvalidateRange.c:
     complete
     .text       start:0x0201c0ac end:0x0201c1e4
@@ -15953,6 +16001,10 @@ src/auto/func_02028550.c:
 src/auto/FSi_NextCommand.c:
     complete
     .text       start:0x020d2088 end:0x020d229c
+src/auto/func_02016c38.cpp:
+    complete
+    .text       start:0x02016c38 end:0x02017310
+
 src/auto/func_02017310.c:
     complete
     .text       start:0x02017310 end:0x0201755c
@@ -16307,6 +16359,10 @@ src/auto/func_02018010.c:
 src/auto/func_02076d2c.c:
     complete
     .text       start:0x02076d2c end:0x02077014
+src/auto/func_02099914.c:
+    complete
+    .text       start:0x02099914 end:0x02099ba0
+
 src/auto/func_02099db4.c:
     complete
     .text       start:0x02099db4 end:0x02099e60
