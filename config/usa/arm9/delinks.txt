@@ -666,6 +666,10 @@ src/auto/func_0201a3cc.c:
     complete
     .text       start:0x0201a3cc end:0x0201a42c
 
+src/auto/func_0201a42c.c:
+    complete
+    .text       start:0x0201a42c end:0x0201a88c
+
 src/auto/func_0201a88c.c:
     complete
     .text       start:0x0201a88c end:0x0201a8a0
@@ -1089,6 +1093,10 @@ src/auto/func_020229b4.c:
 src/auto/func_020229f8.c:
     complete
     .text       start:0x020229f8 end:0x02022a3c
+
+src/auto/func_02023374.cpp:
+    complete
+    .text       start:0x02023374 end:0x02023830
 
 src/auto/func_02023830.c:
     complete
@@ -1681,6 +1689,10 @@ src/auto/func_02032b2c.c:
 src/auto/func_02032b30.c:
     complete
     .text       start:0x02032b30 end:0x02032b44
+
+src/auto/func_0203309c.cpp:
+    complete
+    .text       start:0x0203309c end:0x0203346c
 
 src/auto/func_0203346c.c:
     complete
@@ -3561,6 +3573,10 @@ src/auto/func_0205d0f8.c:
 src/auto/func_0205d158.c:
     complete
     .text       start:0x0205d158 end:0x0205d1a0
+
+src/auto/func_0205d1a0.c:
+    complete
+    .text       start:0x0205d1a0 end:0x0205d378
 
 src/auto/func_0205d378.c:
     complete
@@ -12229,6 +12245,10 @@ src/auto/func_0204c5fc.c:
     complete
     .text       start:0x0204c5fc end:0x0204c654
 
+src/auto/func_02031d90.c:
+    complete
+    .text       start:0x02031d90 end:0x02031e64
+
 src/auto/func_02031e64.c:
     complete
     .text       start:0x02031e64 end:0x02031ef4
@@ -14810,6 +14830,10 @@ src/auto/func_020af7f4.cpp:
     complete
     .text       start:0x020af7f4 end:0x020af864
 
+src/auto/func_020bdd74.c:
+    complete
+    .text       start:0x020bdd74 end:0x020bdf38
+
 src/auto/func_020bdf38.cpp:
     complete
     .text       start:0x020bdf38 end:0x020bdfa8
@@ -14897,6 +14921,10 @@ src/auto/func_0205d80c.cpp:
 src/auto/func_0205d874.cpp:
     complete
     .text       start:0x0205d874 end:0x0205d8a4
+
+src/auto/func_0205ed08.c:
+    complete
+    .text       start:0x0205ed08 end:0x0205ef84
 
 src/auto/func_0205ef84.cpp:
     complete
@@ -15601,6 +15629,10 @@ src/auto/func_02034c68.c:
 src/auto/func_02034e24.c:
     complete
     .text       start:0x02034e24 end:0x02034f88
+src/auto/func_0207376c.c:
+    complete
+    .text       start:0x0207376c end:0x02073a00
+
 src/auto/func_02073a00.c:
     complete
     .text       start:0x02073a00 end:0x02073b68
