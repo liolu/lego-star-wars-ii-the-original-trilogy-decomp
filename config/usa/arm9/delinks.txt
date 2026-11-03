@@ -34,6 +34,14 @@ src/auto/OSi_ReferSymbol.c:
     complete
     .text       start:0x02000b80 end:0x02000b84
 
+src/auto/func_02000e20.c:
+    complete
+    .text       start:0x02000e20 end:0x02001070
+
+src/auto/func_02001084.c:
+    complete
+    .text       start:0x02001084 end:0x0200138c
+
 src/auto/func_0200138c.c:
     complete
     .text       start:0x0200138c end:0x020013a4
@@ -2346,6 +2354,10 @@ src/auto/func_0204a1c4.c:
     complete
     .text       start:0x0204a1c4 end:0x0204a1d4
 
+src/auto/func_0204a400.c:
+    complete
+    .text       start:0x0204a400 end:0x0204a530
+
 src/auto/func_0204a530.c:
     complete
     .text       start:0x0204a530 end:0x0204a544
@@ -2785,6 +2797,10 @@ src/auto/func_02055c48.c:
 src/auto/func_02055c78.c:
     complete
     .text       start:0x02055c78 end:0x02055c94
+
+src/auto/func_02055d0c.c:
+    complete
+    .text       start:0x02055d0c end:0x02055d34
 
 src/auto/func_02055d34.c:
     complete
@@ -8962,9 +8978,21 @@ src/auto/MI_SendGXCommandAsyncFast.c:
     complete
     .text       start:0x020cf0b8 end:0x020cf170
 
+src/auto/MI_CpuFill8.c:
+    complete
+    .text       start:0x020cf344 end:0x020cf3dc
+
+src/auto/MI_CpuCopy8.c:
+    complete
+    .text       start:0x020cf3dc end:0x020cf518
+
 src/auto/MI_SwapWord.c:
     complete
     .text       start:0x020cf53c end:0x020cf544
+
+src/auto/func_020cf544.c:
+    complete
+    .text       start:0x020cf544 end:0x020cf624
 
 src/auto/MIi_LockCard.c:
     complete
@@ -9710,6 +9738,10 @@ src/auto/MATH_CountPopulation.c:
     complete
     .text       start:0x020dde20 end:0x020dde64
 
+src/auto/func_020dde64.c:
+    complete
+    .text       start:0x020dde64 end:0x020de118
+
 src/auto/abort.c:
     complete
     .text       start:0x020de118 end:0x020de13c
@@ -9765,6 +9797,10 @@ src/auto/func_020e13cc.c:
 src/auto/__rounddec.c:
     complete
     .text       start:0x020e13d0 end:0x020e1410
+
+src/auto/_ll_ufrom_d.c:
+    complete
+    .text       start:0x020e2124 end:0x020e21b0
 
 src/auto/_dls.c:
     complete
