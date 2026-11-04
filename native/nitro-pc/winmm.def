@@ -1,0 +1,7 @@
+LIBRARY winmm.dll
+EXPORTS
+timeBeginPeriod@4
+waveOutOpen@24
+waveOutPrepareHeader@12
+waveOutWrite@12
+waveOutUnprepareHeader@12

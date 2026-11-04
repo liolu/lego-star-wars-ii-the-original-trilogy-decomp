@@ -1,4 +1,4 @@
-exclude: ^\.studio/  # queue data of DS Decomp Studio (clang-format would reformat the JSON)
+exclude: ^(\.studio|native)/  # .studio: queue data of DS Decomp Studio (clang-format would reformat the JSON); native: copy of the Nds Game Studio runtime (runtime_sync.py)
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
