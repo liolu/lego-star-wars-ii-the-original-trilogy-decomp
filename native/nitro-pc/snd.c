@@ -806,6 +806,13 @@ void snd_frame(void) {
 
 /* ------------------------------------------------------------------ mixeur */
 static float master = 0.6f;
+static int muted;
+
+/* Volume choisi dans le launcher (paquet, mot 15), en pour cent du volume d'origine. */
+void snd_set_volume(u32 pct) {
+    if (pct > 200) pct = 200;
+    if (!muted) master = 0.6f * (float)pct / 100.0f;
+}
 
 static void mix_ds(s16 *out, u32 frames);
 
@@ -917,6 +924,6 @@ void snd_start_output(void) {
     for (int p = 0; p < PLAYERS; p++)
         for (int t = 0; t < 16; t++) players[p].tracks[t] = 0xFF;
     for (int t = 0; t < TRACKS; t++) tracks[t].index = (u8)t;
-    if (nds_arg("--mute", 0)) master = 0;
+    if (nds_arg("--mute", 0)) { master = 0; muted = 1; }
     if (!nds_fixed_clock) os_thread_start(audio_thread, 0, 0x40000);
 }
