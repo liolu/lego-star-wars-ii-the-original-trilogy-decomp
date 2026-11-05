@@ -42,7 +42,8 @@ void present_init(void) {
 #define MAX_H 1152
 #define SHM_HEADER 4096
 /* En-tete de la memoire partagee (native_game.rs) : le module y ecrit ses images, et ce qu'il demande au launcher.
- * protocol 2 : le launcher envoie alors le paquet de 64 octets (input_thread). flags : bit 0 = retenir le curseur.
+ * protocol 2 : le launcher envoie alors le paquet de 64 octets (input_thread). flags : bit 0 = retenir le curseur,
+ * bit 1 = vitesse et volume lus (mots 14 et 15 du paquet).
  * notice_seq change a chaque message ; le texte (UTF-8, termine par 0) est a NOTICE_AT. */
 typedef struct { volatile u32 seq, width, height, front, protocol, flags, notice_seq, notice_ms; } ShmHeader;
 #define PROTOCOL 2
@@ -199,12 +200,13 @@ void present_notice(const char *text, u32 ms) {
 }
 
 static void header_init(void) {
-    if (shm) ((ShmHeader *)shm)->protocol = PROTOCOL;
+    if (shm) { ((ShmHeader *)shm)->protocol = PROTOCOL; ((ShmHeader *)shm)->flags = 2u; }
 }
 
 /* le curseur retenu : un mod le demande (api->capture_mouse), par exemple pour diriger une camera a la souris */
 static void header_flags(void) {
-    if (shm) ((ShmHeader *)shm)->flags = nds_mods_mouse_captured ? 1 : 0;
+    /* bit 1 : ce runtime lit la vitesse et le volume du paquet */
+    if (shm) ((ShmHeader *)shm)->flags = (nds_mods_mouse_captured ? 1u : 0u) | 2u;
 }
 
 static void read_all(void *buf, u32 size) {
@@ -234,6 +236,9 @@ static void input_thread(void *arg) {
             mouse_x = (s16)packet[7];
             mouse_y = (s16)packet[8];
             window_flags = packet[9];
+            /* 14 vitesse en pour cent, 15 volume + 1 ; 0 = pas envoye (launcher d'avant) */
+            if (packet[14]) io_set_speed(packet[14]);
+            if (packet[15]) snd_set_volume(packet[15] - 1u);
             mouse_buttons = packet[10] | (u32)packet[11] << 16;
             wheel = (s32)(packet[12] | (u32)packet[13] << 16);
             continue;

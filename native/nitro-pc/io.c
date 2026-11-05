@@ -28,10 +28,31 @@ static u32 clock_k; /* cycles par tic QPC, en virgule fixe 16 bits */
 int nds_fixed_clock;
 static u64 fixed_now;
 
+/* Vitesse du jeu en pour cent (paquet du launcher, mot 14). Tant qu'elle n'a jamais change, l'horloge est exactement
+ * celle d'avant ; ensuite le temps du jeu avance de (temps reel x vitesse), sans saut quand la vitesse change. */
+static volatile u32 speed_pct = 100;
+static int speed_used;
+static s64 speed_last;
+static u64 speed_ticks;
+
+void io_set_speed(u32 pct) {
+    if (pct < 10) pct = 10;
+    if (pct > 1000) pct = 1000;
+    speed_pct = pct;
+}
+
 static u64 cycles64(void) {
     if (nds_fixed_clock) return fixed_now += 1000;
     s64 now = os_time_now();
-    return ((u64)(now - t0) * clock_k) >> 16;
+    u32 pct = speed_pct;
+    if (!speed_used) {
+        if (pct == 100) return ((u64)(now - t0) * clock_k) >> 16;
+        speed_used = 1;
+        speed_last = t0;
+    }
+    speed_ticks += (u64)(now - speed_last) * pct / 100;
+    speed_last = now;
+    return (speed_ticks * clock_k) >> 16;
 }
 
 u32 io_cycles(void) { return (u32)cycles64(); }
@@ -476,4 +497,8 @@ void io_init(void) {
     REG32(0x027FFC00u) = 0x00000FC2u;
     REG32(0x027FF800u) = 0x00000FC2u;
     REG32(0x027FFC3Cu) = 0x00000FC2u;
+    /* --ds-lang n : langue de la console (0 japonais, 1 anglais, 2 francais, 3 allemand, 4 italien, 5 espagnol), lue par
+     * OS_GetLanguage dans les reglages de l'utilisateur (0x027FFC80 + 0x64). Sans l'option, la memoire reste telle quelle. */
+    const char *lang;
+    if (nds_arg("--ds-lang", &lang) && lang && *lang >= '0' && *lang <= '5') REG8(0x027FFCE4u) = (u8)((REG8(0x027FFCE4u) & ~7) | (*lang - '0'));
 }

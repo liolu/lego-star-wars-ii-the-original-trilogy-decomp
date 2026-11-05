@@ -135,6 +135,8 @@ u32 present_pad(void);
 void present_notice(const char *text, u32 ms);
 void present_input_extra(u32 *buttons, int *wheel, u32 *keys);
 const char *present_language(void);
+void io_set_speed(u32 pct);
+void snd_set_volume(u32 pct);
 u32 present_window_flags(void);
 void present_flags_changed(void);
 void present_touch(int *down, int *x, int *y);
