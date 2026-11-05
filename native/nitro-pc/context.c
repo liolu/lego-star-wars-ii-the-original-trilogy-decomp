@@ -186,10 +186,29 @@ __asm__(
 
 void nds_ctx_start(void);
 
+/* nds_stack_reuse (patches.json) : pile de l'hote deja prise par ce contexte, ou par un fil termine (etat 2 a +0x64) ; un jeu
+ * qui recree ses fils a chaque scene ne doit pas reserver 1 Mo de plus a chaque fois. 0 : il faut une nouvelle pile. */
+u8 *nds_ctx_reuse(u32 ctx, u32 size) {
+    extern const u32 nds_stack_reuse;
+    if (!nds_stack_reuse) return 0;
+    for (int i = 0; i < SLOTS; i++)
+        if (slots[i].ctx == ctx && bounds[i].lo && bounds[i].hi - bounds[i].lo == size) return (u8 *)bounds[i].lo;
+    for (int i = 0; i < SLOTS; i++) {
+        if (!slots[i].ctx || slots[i].ctx == ctx || !bounds[i].lo || bounds[i].hi - bounds[i].lo != size) continue;
+        if (*(u32 *)DS(slots[i].ctx + 0x64) != 2) continue;
+        u8 *p = (u8 *)bounds[i].lo;
+        slots[i].ctx = 0;
+        bounds[i].lo = bounds[i].hi = 0;
+        return p;
+    }
+    return 0;
+}
+
 /* fil neuf : le premier OS_LoadContext(ctx) appelle entry(ctx) en haut de [stack, stack + size) */
 void nds_ctx_init(u32 ctx, u8 *stack, u32 size, void (*entry)(u32), u32 func) {
     Slot *s = slot_of(ctx);
-    u8 *top = (u8 *)(((uptr)(stack + size) - 64) & ~(uptr)15);
+    extern const u32 nds_stack_margin; /* patches.json, 0 = 64 octets comme avant */
+    u8 *top = (u8 *)(((uptr)(stack + size) - (nds_stack_margin ? nds_stack_margin : 64)) & ~(uptr)15);
     nds_zero((u8 *)s + 4, sizeof(Slot) - 4); /* garde ctx, a la tete des trois versions */
     bounds[s - slots].lo = (uptr)stack;
     bounds[s - slots].hi = (uptr)(stack + size);

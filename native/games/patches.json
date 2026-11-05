@@ -1,5 +1,6 @@
 {
  "AL7E": {
+  "arm_stack": true,
   "functions": {
    "nds_open_screen": "func_0205ecc4"
   },
@@ -8,6 +9,7 @@
    "0x020b01bc": "nds_hook_spin",
    "0x020ce868": "nds_hook_spin"
   },
+  "lift_parts": 4,
   "names": {
    "0x020d78c0": "WM_StartMP",
    "0x020d7d48": "WM_EndDataSharing"

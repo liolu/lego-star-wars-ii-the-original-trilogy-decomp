@@ -20,6 +20,7 @@ void nds_run_on_stack(u8 *top, void (*fn)(void));
 uptr nds_mem;
 #endif
 u32 nds_pc, nds_r[6], nds_cpsr = 0x1F;
+const u32 nds_stack_margin = 0, nds_stack_reuse = 0; /* valeurs de patches.json (tables.c des jeux) lues par context.c */
 
 /* ------------------------------------------------------------------ verifications */
 static int checks, failures;

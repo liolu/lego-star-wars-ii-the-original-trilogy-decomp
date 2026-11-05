@@ -19,9 +19,25 @@ static void current_touch(TPData *d) {
     d->validity = 0;
 }
 
+/* Rappel de l'echantillonnage automatique (TP_SetCallback) : seulement pour un jeu qui nomme hle_tp_set_callback et
+ * hle_tp_latest_index dans patches.json ("names") ; les autres jeux gardent leur TP_SetCallback et rien n'est appele. */
+static u32 tp_callback, auto_latest;
+void hle_tp_set_callback(u32 cb) { tp_callback = cb; }
+u32 hle_tp_latest_index(void) { return auto_latest; }
+
 void hle_frame(void) {
     if (auto_buf)
         for (u32 i = 0; i < auto_size; i++) current_touch(&auto_buf[i]);
+    if (auto_buf && auto_size && tp_callback) {
+        /* comme l'ARM7 : un nouvel echantillon, puis TP_REQUEST_COMMAND_AUTO_SAMPLING (0x10), resultat 0, son indice */
+        auto_latest = (auto_latest + 1) % auto_size;
+        /* "arm_stack" : le rappel tourne sur la pile des interruptions, comme irq_deliver, pas sous un cadre du jeu en cours */
+        extern u32 nds_sp;
+        u32 saved_sp = nds_sp;
+        nds_sp = nds_dtcm_base() + 0x3F80u;
+        ((Fn)nds_call_target(tp_callback))(0x10, 0, auto_latest, 0);
+        nds_sp = saved_sp;
+    }
 }
 
 void TP_Init(void) {}
@@ -94,6 +110,9 @@ u32 FSi_ReadRomCallback(u32 arc, u32 dst, u32 pos, u32 size) {
     if (nds_cb.rom_read) nds_mods_rom_read(pos, size, DS(dst));
     return 0;
 }
+
+/* porte ("gates" de patches.json) : la fonction du jeu ne s'execute pas, par exemple une video que le runtime ne sait pas lire */
+int nds_gate_skip(u32 r0) { return 1; }
 
 /* OS_Terminate des assertions du jeu : autant le dire que tourner en rond sans image */
 void nds_hook_game_halt(u32 r0) {

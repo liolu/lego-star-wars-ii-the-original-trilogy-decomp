@@ -110,6 +110,14 @@ def export(game, code, sha1, path):
     loads = sorted([frm, to & ~1] for frm, (kind, to) in game.relocs.items() if kind == "load" and (to & ~1) in known)
     data = {n: a for n, a in game.data.items() if not re.match(r"(data|lbl|func|sub|unk)_", n)}
     recipe = {"code": code, "sha1": sha1, "build_info": game.build_info, "functions": functions, "loads": loads, "data": data, "overlays": game.overlays}
+    if getattr(game, "multi", False):
+        # overlays qui se chevauchent ("overlays": "multi") : le module principal seul dans functions, chaque overlay a part
+        recipe["functions"] = [f for f in functions if f[0] in game.main_addrs]
+        recipe["ov_functions"] = {str(num): [[addr, size, 1 if thumb else 0, None if name == default_name(addr) else name]
+                                             for addr, (name, size, thumb) in sorted(funcs.items())]
+                                  for num, funcs in sorted(game.ov_functions.items())}
+        recipe["ov_loads"] = {str(num): sorted([frm, to & ~1] for frm, (kind, to) in relocs.items() if kind == "load")
+                              for num, relocs in sorted(game.ov_relocs.items())}
     # sans date dans le fichier : une recette identique ne change pas dans git
     with open(path, "wb") as raw, gzip.GzipFile(filename="", fileobj=raw, mode="wb", compresslevel=9, mtime=0) as z:
         z.write(json.dumps(recipe, separators=(",", ":")).encode("utf8"))
@@ -133,6 +141,9 @@ class RecipeGame:
         self.image, self.entry = rom_images(rom_path, self.build_info)
         self.overlays = [tuple(o) for o in r.get("overlays", [])]
         self.overlay_images = rom_overlays(rom_path) if self.overlays else {}
+        self.main_addrs = set(self.functions)
+        self.ov_functions = {int(num): {a: (n or default_name(a), s, bool(t)) for a, s, t, n in funcs} for num, funcs in r.get("ov_functions", {}).items()}
+        self.ov_relocs = {int(num): {frm: ("load", to) for frm, to in loads} for num, loads in r.get("ov_loads", {}).items()}
 
     def memory(self, addr, n):
         return read_memory(self, addr, n)
