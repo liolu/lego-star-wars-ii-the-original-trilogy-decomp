@@ -120,7 +120,39 @@ u32 nds_eh_enter(u32 func, u32 size, u32 sp); void nds_eh_leave(u32 key); u32 nd
 #define CALLF(f) do { u64 _t = ((u64 (*)())(f))(r0, r1, r2, r3, @STACK@); r0 = (u32)_t; r1 = (u32)(_t >> 32); } while (0)
 #endif
 """
+# "shared_regs" (patches.json) : seulement dans lifted.c des jeux qui le demandent
+# "arm_stack" (patches.json) : l'appel ne passe que r0-r3 et sp (nds_sp, defini par le runtime), l'appele lit ses arguments
+# sur la vraie pile ARM, comme le mode NDS_EH de Pokemon Dash sans les exceptions. gcc compile ainsi 6 a 8 fois plus vite :
+# 14 a 36 arguments a chaque appel coutaient l'essentiel de l'allocation de registres. Ajoute apres PRELUDE, qui ne change pas.
+ARM_STACK_PRELUDE = """
+extern u32 nds_sp;
+#undef CALLF
+#define CALLF(f) do { nds_sp = sp; u64 _t = ((u64 (*)())(f))(r0, r1, r2, r3); r0 = (u32)_t; r1 = (u32)(_t >> 32); } while (0)
+"""
+XR_EXTRA = 1024  # mots de pile en plus sous sp : les fonctions partagees empilent dans le cadre de la premiere appelee
+XR_PRELUDE = """
+u32 nds_xr[14], nds_xr_in;
+#define XR_OUT() (nds_xr[2] = r2, nds_xr[3] = r3, nds_xr[4] = r4, nds_xr[5] = r5, nds_xr[6] = r6, nds_xr[7] = r7, nds_xr[8] = r8, nds_xr[9] = r9, nds_xr[10] = r10, nds_xr[11] = r11, nds_xr[12] = r12, nds_xr[13] = sp)
+#define XR_IN() (nds_xr[4] = r4, nds_xr[5] = r5, nds_xr[6] = r6, nds_xr[7] = r7, nds_xr[8] = r8, nds_xr[9] = r9, nds_xr[10] = r10, nds_xr[11] = r11, nds_xr[12] = r12, nds_xr[13] = sp, nds_xr_in = 1)
+#define XR_LOAD() (r2 = nds_xr[2], r3 = nds_xr[3], r4 = nds_xr[4], r5 = nds_xr[5], r6 = nds_xr[6], r7 = nds_xr[7], r8 = nds_xr[8], r9 = nds_xr[9], r10 = nds_xr[10], r11 = nds_xr[11], r12 = nds_xr[12], sp = nds_xr[13])
+#define CALLX(f) do { XR_IN(); CALLF(f); XR_LOAD(); } while (0)
+#define CALLXI(a) do { u32 _xa = (a); if (XR_SHARED(_xa)) CALLX(nds_call_target(_xa)); else CALLF(nds_call_target(_xa)); } while (0)
+"""
+
+
+def xr_shared_macro(ranges):
+    """XR_SHARED(a) : l'adresse a est-elle dans une plage "shared_regs" ?"""
+    return "#define XR_SHARED(a) (%s)\n" % (" || ".join("((u32)(a) - 0x%xu) < 0x%xu" % (lo, hi - lo) for lo, hi in ranges) or "0")
+
+PRELUDE_TEMPLATE = PRELUDE
 PRELUDE = PRELUDE.replace("@STACK@", ", ".join("P32(sp + %d)" % (4 * k) for k in range(STACK_ARGS)))
+
+
+def set_stack_args(n):
+    """"stack_args" (patches.json) : plus de mots de pile passes a chaque appel, pour un jeu qui passe de grosses structures par valeur."""
+    global STACK_ARGS, PRELUDE
+    STACK_ARGS = n
+    PRELUDE = PRELUDE_TEMPLATE.replace("@STACK@", ", ".join("P32(sp + %d)" % (4 * k) for k in range(STACK_ARGS)))
 
 
 def reg_name(i):
@@ -139,6 +171,9 @@ class Lifter:
         self.th = Cs(CS_ARCH_ARM, CS_MODE_THUMB)
         self.arm.detail = self.th.detail = True
         self.new_subs = {}
+        self.arm_stack = False  # "arm_stack" (patches.json) : sp = nds_sp, la vraie pile ARM ; pas de cadre stack_ ni de copie d'arguments (ARM_STACK_PRELUDE)
+        self.shared_ranges = []  # [(debut, fin)] : assembleur ecrit a la main qui se passe r2-r12 d'une fonction a l'autre (XR_PRELUDE)
+        self.sub_prefix = ""  # sous-routines d'un overlay ("overlays": "multi") : ovNNN_sub_...
         self.hooks = {}  # adresse -> fonction du runtime appelee a l'entree, avec r0
         self.exit_hooks = {}  # adresse -> fonction du runtime appelee a chaque sortie
         self.gates = {}  # adresse -> fonction du runtime appelee a l'entree, avec r0 : si elle ne renvoie pas 0, la fonction du jeu ne tourne pas
@@ -150,7 +185,7 @@ class Lifter:
         self.debug_pc = False
         self.eh_end_catch = None  # adresse de __end_catch : le jeu lance de vraies exceptions C++ (NDS_EH du PRELUDE)
         self.hook_all = False  # chaque fonction traduite passe par HOOK_ENTRY : un mod peut la remplacer
-        self.hooked = {}  # adresse -> (nom, k) : nds_hook_slot[k] de la fonction
+        self.hooked = {}  # (adresse, nom) -> (nom, k) : nds_hook_slot[k] de la fonction (deux overlays peuvent avoir la meme adresse)
         self.insn_hooks = {}  # adresse d'instruction -> k : NDS_INSN avant elle, nds_insn_slot[k] ("instruction_hooks" des mods)
 
     def decode(self, addr, thumb):
@@ -165,7 +200,7 @@ class Lifter:
             return self.symbols[addr]
         name = self.new_subs.get(addr)
         if name is None:
-            name = "sub_%08x" % addr
+            name = "%ssub_%08x" % (self.sub_prefix, addr)
             self.new_subs[addr] = name
         return name
 
@@ -698,12 +733,17 @@ class Lifter:
                 marker = "  " + out[a][0]
                 text = text.replace(marker, label + "\n" + marker, 1)
         args = ", ".join(["u32 r0", "u32 r1", "u32 r2", "u32 r3"] + ["u32 a%d" % i for i in range(STACK_ARGS)])
+        xr = any(lo <= entry < hi for lo, hi in self.shared_ranges)
+        extra = XR_EXTRA if xr else 0
         head = [
             "u64 %s(%s) {" % (name + "__o" if self.hook_all else name, args),
-            "  u32 stack_[%d]; u32 sp = HOST2DS(&stack_[%d]);" % (self.frame_words(out) + STACK_ARGS + 2, self.frame_words(out)),
+            "  u32 stack_[%d]; u32 sp = HOST2DS(&stack_[%d]);" % (self.frame_words(out) + STACK_ARGS + 2 + extra, self.frame_words(out) + extra),
             "  u32 r4=0,r5=0,r6=0,r7=0,r8=0,r9=0,r10=0,r11=0,r12=0,lr=MAGIC_LR,res=0,sh=0,pc_val=0; u32 n=0,z=0,c=0,v=0;",
-            "  " + " ".join("stack_[%d]=a%d;" % (self.frame_words(out) + i, i) for i in range(STACK_ARGS)),
+            "  " + " ".join("stack_[%d]=a%d;" % (self.frame_words(out) + extra + i, i) for i in range(STACK_ARGS)),
         ]
+        if self.arm_stack and self.eh_end_catch is None:
+            head[1] = "  u32 sp = nds_sp;"
+            head[3] = ""
         if self.eh_end_catch is not None:
             head[1] = "  u32 sp = nds_sp;"
             head[2] = head[2].replace("lr=MAGIC_LR", "lr=nds_lr")
@@ -726,11 +766,21 @@ class Lifter:
             body = body.replace(RET, "{ nds_eh_leave(eh_key_); " + RET + " }")
         if name in self.flag_funcs:
             body = body.replace(RET, "{ SAVEF(); " + RET + " }")
+        if any(lo <= entry < hi for lo, hi in self.shared_ranges):
+            # registres recus et rendus par nds_xr, appels qui les transmettent (CALLX)
+            body = body.replace("r4=0,r5=0,r6=0,r7=0,r8=0,r9=0,r10=0,r11=0,r12=0,", "r4=nds_xr[4],r5=nds_xr[5],r6=nds_xr[6],r7=nds_xr[7],r8=nds_xr[8],r9=nds_xr[9],r10=nds_xr[10],r11=nds_xr[11],r12=nds_xr[12],", 1)
+            body = body.replace("u32 sp = HOST2DS(", "u32 sp = nds_xr_in ? nds_xr[13] : HOST2DS(", 1)
+            body = body.replace("  u32 r4=nds_xr[4]", "  nds_xr_in = 0; u32 r4=nds_xr[4]", 1)
+            shared = {n for a, n in self.symbols.items() if any(lo <= a < hi for lo, hi in self.shared_ranges)}
+            shared |= {n for a, n in self.new_subs.items() if any(lo <= a < hi for lo, hi in self.shared_ranges)}
+            body = re.sub(r"CALLF\(nds_call_target\(([^()]*)\)\)", r"CALLXI(\1)", body)
+            body = re.sub(r"CALLF\((\w+)\)", lambda m: ("CALLX(%s)" if m.group(1) in shared else "CALLF(%s)") % m.group(1), body)
+            body = body.replace(RET, "{ XR_OUT(); " + RET + " }")
         if entry in self.exit_hooks:
             fn = self.exit_hooks[entry]
             body = body.replace(RET, "{ extern void %s(void); %s(); %s }" % (fn, fn, RET))
         if self.hook_all:
-            k = self.hooked.setdefault(entry, (name, len(self.hooked)))[1]
+            k = self.hooked.setdefault((entry, name), (name, len(self.hooked)))[1]
             body += "HOOK_ENTRY(%s, %d);\n" % (name, k)
         return body
 
@@ -740,7 +790,7 @@ class Lifter:
         out = ["void *nds_hook_slot[%d];" % max(len(rows), 1)]
         out += ["u64 %s__o();" % name for _, (name, _) in rows]
         out.append("const struct { u32 arm; u32 slot; void *orig; } nds_hook_table[] = {")
-        out += ["  {0x%08xu, %d, (void *)%s__o}," % (addr, k, name) for addr, (name, k) in rows]
+        out += ["  {0x%08xu, %d, (void *)%s__o}," % (addr, k, name) for (addr, _), (name, k) in rows]
         if not rows:
             out.append("  {0, 0, 0},")
         out.append("};\nconst unsigned nds_hook_count = %d;" % len(rows))

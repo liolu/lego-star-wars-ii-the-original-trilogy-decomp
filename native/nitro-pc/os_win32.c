@@ -161,10 +161,12 @@ u32 os_stdin_read(void *buf, u32 max) {
 }
 
 int os_get_args(const char **argv, int max) {
-    static char line[2048];
+    static char line[32768]; /* longueur maximale d'une ligne de commande Windows : --keys des essais peut etre long */
     const char *c = GetCommandLineA();
     int n = 0, argc = 0;
-    while (*c && n < 2047) line[n++] = *c++;
+    extern const unsigned nds_long_args; /* patches.json : sinon 2047 caracteres comme avant */
+    int limit = nds_long_args ? (int)sizeof line - 1 : 2047;
+    while (*c && n < limit) line[n++] = *c++;
     line[n] = 0;
     char *p = line;
     while (*p && argc < max) {

@@ -69,6 +69,10 @@ void nds_fatal(const char *fmt, ...) {
     va_start(ap, fmt);
     vlog(fmt, ap);
     va_end(ap);
+#ifdef NDS_INSTRUMENT
+    { extern u32 nds_ring[4096], nds_ring_pos; extern u32 nds_pc; nds_log("arm=%x, derniers appels :", nds_pc);
+      for (int i = 4096 - 120; i < 4096; i++) nds_log("  appel %8x", nds_ring[(nds_ring_pos + i) & 4095]); }
+#endif
     nds_mods_crash_note();
     os_exit(3);
 }
@@ -325,6 +329,12 @@ typedef u64 (*Fn)();
 static u32 next_stack = 0x20000000u; /* adresse DS */
 static u8 *stack_alloc(u32 size) {
     u8 *p = os_mem_alloc(DS(next_stack), size);
+    /* une zone deja prise (pile d'un fil de l'hote, bibliotheque) : on essaie plus loin */
+    extern const u32 nds_stack_reuse;
+    for (int tries = 0; !p && nds_stack_reuse && tries < 512; tries++) {
+        next_stack += 0x100000u;
+        p = os_mem_alloc(DS(next_stack), size);
+    }
     if (!p) nds_fatal("pile impossible a %x", next_stack);
     next_stack += (size + 0xFFFF) & ~0xFFFFu;
     return p;
@@ -344,7 +354,9 @@ static void thread_tramp(u32 ctx) {
 void OS_InitContext(u32 ctx, u32 pc, u32 sp) {
     u32 *c = (u32 *)DS(ctx);
     enum { STACK = 1 << 20 };
-    nds_ctx_init(ctx, stack_alloc(STACK), STACK, thread_tramp, pc);
+    extern u8 *nds_ctx_reuse(u32 ctx, u32 size);
+    u8 *st = nds_ctx_reuse(ctx, STACK);
+    nds_ctx_init(ctx, st ? st : stack_alloc(STACK), STACK, thread_tramp, pc);
     nds_zero(c, 0x48);
     c[0] = 0x1F;
     c[14] = sp;
@@ -588,6 +600,8 @@ void nds_start(void) {
     enum { MAIN_STACK = 16 << 20 };
     u8 *stack = stack_alloc(MAIN_STACK);
     os_set_stack_bounds((uptr)stack, (uptr)(stack + MAIN_STACK));
-    nds_run_on_stack(stack + MAIN_STACK - 64, run_game);
+    /* marge : une fonction traduite lit ses STACK_ARGS arguments, jusqu'a 32 mots ("stack_args") ; 64 octets par defaut */
+    extern const u32 nds_stack_margin;
+    nds_run_on_stack(stack + MAIN_STACK - (nds_stack_margin ? nds_stack_margin : 64), run_game);
     nds_fatal("le jeu s'est termine");
 }

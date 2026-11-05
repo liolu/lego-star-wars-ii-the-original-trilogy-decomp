@@ -282,7 +282,15 @@ static void menu_shortcut(void) {
     }
     if (down && !was_down) {
         nds_log("reseau : menu multijoueur");
+        /* "arm_stack" : hors d'un appel du jeu, la fonction prend la pile des interruptions et y lit ses deux arguments de pile
+         * (les autres jeux les recoivent en arguments C et ignorent nds_sp) */
+        extern u32 nds_sp;
+        u32 saved_sp = nds_sp;
+        nds_sp = nds_dtcm_base() + 0x3F80u - 8;
+        *(u32 *)DS(nds_sp) = 1;
+        *(u32 *)DS(nds_sp + 4) = 0;
         ((void (*)(u32, u32, u32, u32, u32, u32))nds_open_screen)(nds_net_screens, nds_net_menu_screen, 1, 0, 1, 0);
+        nds_sp = saved_sp;
     }
     was_down = down;
 }
