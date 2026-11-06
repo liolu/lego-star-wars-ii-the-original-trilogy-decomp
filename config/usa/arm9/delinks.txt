@@ -10165,6 +10165,10 @@ src/auto/GXi_NopClearFifo128_.c:
     complete
     .text       start:0x020cb200 end:0x020cb294
 
+src/auto/G3i_OrthoW_.c:
+    complete
+    .text       start:0x020cb294 end:0x020cb558
+
 src/auto/G3i_LookAt_.c:
     complete
     .text       start:0x020cb558 end:0x020cb6e4
