@@ -38,7 +38,7 @@ typedef struct {
 
 extern u8 func_020e335c(void *);
 extern u8 func_020e3378(void *);
-extern u8 *func_020e30d8(u8 *, s32 *);
+extern u8 *_Z20__DecodeSignedNumberPcPl(u8 *, s32 *);
 
 u8 *func_020e3fb0(A *a, B *b) {
     S s;
@@ -85,7 +85,7 @@ u8 *func_020e3fb0(A *a, B *b) {
                 continue;
             case 13: {
                 u8 *p;
-                func_020e30d8(s.f08 + 1, &v);
+                _Z20__DecodeSignedNumberPcPl(s.f08 + 1, &v);
                 p      = s.f30 + v;
                 a->f00 = *(s32 *) (p + 4);
                 a->f04 = *(s32 *) p;

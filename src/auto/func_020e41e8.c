@@ -17,8 +17,8 @@
 
 extern u8 func_020e335c(void *);
 extern u8 func_020e3378(void *);
-extern u8 *func_020e3164(u8 *p, s32 *out);
-extern u8 *func_020e30d8(u8 *p, s32 *out);
+extern u8 *_Z22__DecodeUnsignedNumberPcPm(u8 *p, s32 *out);
+extern u8 *_Z20__DecodeSignedNumberPcPl(u8 *p, s32 *out);
 extern s32 func_020e48dc(void *, s32, void *);
 extern s32 func_020e4104(void *, void *);
 extern void func_020e4188(void *, void *, void *, void *);
@@ -110,8 +110,8 @@ u8 *func_020e41e8(A *a, B *b, void *arg2) {
                 u8 *p = s.f08;
                 u8 *q;
                 tmp.f10 = (u32) p[1] | ((u32) p[2] << 8) | ((u32) p[3] << 16) | ((u32) p[4] << 24);
-                q       = func_020e3164(p + 5, &tmp.f14);
-                q       = func_020e30d8(q, &tmp.f18);
+                q       = _Z22__DecodeUnsignedNumberPcPm(p + 5, &tmp.f14);
+                q       = _Z20__DecodeSignedNumberPcPl(q, &tmp.f18);
                 if (func_020e48dc(a->f00, tmp.f10, arg2) != 0) {
                     goto out;
                 }
@@ -120,9 +120,9 @@ u8 *func_020e41e8(A *a, B *b, void *arg2) {
             case 15: {
                 u8 *p = s.f08;
                 u8 *q;
-                q       = func_020e3164(p + 1, &tmp.f00);
-                q       = func_020e3164(q, &tmp.f04);
-                q       = func_020e30d8(q, &tmp.f08);
+                q       = _Z22__DecodeUnsignedNumberPcPm(p + 1, &tmp.f00);
+                q       = _Z22__DecodeUnsignedNumberPcPm(q, &tmp.f04);
+                q       = _Z20__DecodeSignedNumberPcPl(q, &tmp.f08);
                 tmp.f0c = q;
                 if (func_020e4104(a->f00, &tmp) == 0) {
                     func_020e4188(a, b, &tmp, s.f08);

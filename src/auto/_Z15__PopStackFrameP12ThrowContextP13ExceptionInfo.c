@@ -3,7 +3,7 @@
  * by tools/donor_match.py */
 typedef unsigned short u16;
 #pragma opt_strength_reduction off
-void *func_020e4a8c(char *self) {
+void *_Z15__PopStackFrameP12ThrowContextP13ExceptionInfo(char *self) {
     int off  = (*(unsigned char *) (self + 0x6a) != 0) ? 0x10 : 0;
     int f60  = *(int *) (self + 0x60);
     char *lr = (char *) (*(int *) (self + 0x18) + f60 - off);

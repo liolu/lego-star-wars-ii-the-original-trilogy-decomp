@@ -1,6 +1,6 @@
 #include "m2c.h"
 
-extern u8 *func_020e3164(u8 *p, s32 *out);
+extern u8 *_Z22__DecodeUnsignedNumberPcPm(u8 *p, s32 *out);
 
 typedef struct {
     /* 0x00 */ s32 f00;
@@ -34,9 +34,9 @@ void func_020e4ae8(Self *self, Arg1 *arg1) {
     self->f6c = (flags & 0x80) != 0;
     self->f68 = p[1] << 4;
     self->f68 |= 0x4000;
-    q = func_020e3164(p + 2, &self->f60);
+    q = _Z22__DecodeUnsignedNumberPcPm(p + 2, &self->f60);
     if (flags & 0x40) {
-        func_020e3164(q, &self->f64);
+        _Z22__DecodeUnsignedNumberPcPm(q, &self->f64);
     }
     if (flags & 0x40) {
         if (flags & 0x80) {

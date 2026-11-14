@@ -2,7 +2,7 @@
 /* ReadSignedVarInt from https://github.com/tangosdev/sm64ds-decomp src/ReadSignedVarInt.c (license: MIT), reused by
  * tools/donor_match.py */
 #pragma ipa file
-unsigned char *func_020e30d8(unsigned char *p, int *out) {
+unsigned char *_Z20__DecodeSignedNumberPcPl(unsigned char *p, int *out) {
     int b0 = (signed char) p[0];
     if ((b0 & 1) == 0) {
         *out = b0 >> 1;

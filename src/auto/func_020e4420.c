@@ -16,8 +16,8 @@ extern void func_020e48a4(void);
 extern void func_020e4ae8(void *self, void *arg1);
 extern u8 *func_020e3fb0(void *a, void *b);
 extern u8 *func_020e41e8(void *a, void *b, void *arg2);
-extern u8 *func_020e3164(u8 *p, s32 *out);
-extern u8 *func_020e30d8(u8 *p, s32 *out);
+extern u8 *_Z22__DecodeUnsignedNumberPcPm(u8 *p, s32 *out);
+extern u8 *_Z20__DecodeSignedNumberPcPl(u8 *p, s32 *out);
 extern void func_020e3700(void *self, void *sb, u8 *p);
 extern void func_020e43c4(u32 *p, s32 a, s32 b);
 extern void func_020e4bd8(void *self, void *sb, void *target);
@@ -81,7 +81,7 @@ void func_020e4420(A *self) {
     }
     p       = func_020e41e8(self, &sb, &loc.v00);
     loc.v04 = (u32) p[1] | ((u32) p[2] << 8) | ((u32) p[3] << 16) | ((u32) p[4] << 24);
-    func_020e30d8(func_020e3164(p + 5, &loc.v08), &loc.v0c);
+    _Z20__DecodeSignedNumberPcPl(_Z22__DecodeUnsignedNumberPcPm(p + 5, &loc.v08), &loc.v0c);
     func_020e3700(self, &sb, p);
     func_020e43c4((u32 *) self, loc.v0c, loc.v00);
     func_020e4bd8(self, &sb, (void *) (sb.f00 + loc.v08));

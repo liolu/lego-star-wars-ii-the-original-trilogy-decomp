@@ -225,14 +225,14 @@ src/auto/sys_ReadChar.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/func_020e303c.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/__read_console.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/__write_console.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
-src/auto/func_020e30d8.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
-src/auto/func_020e3164.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/_Z20__DecodeSignedNumberPcPl.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/_Z22__DecodeUnsignedNumberPcPm.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/func_020e31f0.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/func_020e3254.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/func_020e335c.c 1.2/sp2p3
 src/auto/func_020e43c4.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/__destroy_global_chain.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
-src/auto/func_020e4a8c.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/_Z15__PopStackFrameP12ThrowContextP13ExceptionInfo.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/func_020e4bd8.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/func_020bb74c.c 1.2/sp2p3
 src/auto/func_02006b24.c 2.0/sp1p5 -O4,s
@@ -337,3 +337,6 @@ src/donor/MBi_SendVolatBeacon.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,n
 src/donor/MB_DisconnectChild.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/donor/double2hex.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/donor/float2str.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/_ll_ufrom_d.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/CARDi_InitCommon.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/__pformatter.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto

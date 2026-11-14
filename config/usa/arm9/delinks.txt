@@ -10937,11 +10937,11 @@ src/auto/__write_console.c:
     complete
     .text       start:0x020e309c end:0x020e30d0
 
-src/auto/func_020e30d8.c:
+src/auto/_Z20__DecodeSignedNumberPcPl.c:
     complete
     .text       start:0x020e30d8 end:0x020e3164
 
-src/auto/func_020e3164.c:
+src/auto/_Z22__DecodeUnsignedNumberPcPm.c:
     complete
     .text       start:0x020e3164 end:0x020e31f0
 
@@ -10965,7 +10965,7 @@ src/auto/__destroy_global_chain.c:
     complete
     .text       start:0x020e4560 end:0x020e45a4
 
-src/auto/func_020e4a8c.c:
+src/auto/_Z15__PopStackFrameP12ThrowContextP13ExceptionInfo.c:
     complete
     .text       start:0x020e4a8c end:0x020e4ae8
 
@@ -23094,3 +23094,16 @@ src/data/main_ctor_020fcc38.c:
 src/data/main_ctor_020fcc3c.c:
     complete
     .ctor       start:0x020fcc3c end:0x020fcc40
+
+src/auto/func_02011974.cpp:
+    complete
+    .text       start:0x02011974 end:0x02011f64
+
+src/auto/CARDi_InitCommon.c:
+    complete
+    .text       start:0x020d4e74 end:0x020d4f78
+
+src/auto/__pformatter.c:
+    complete
+    .text       start:0x020e0240 end:0x020e0a64
+
