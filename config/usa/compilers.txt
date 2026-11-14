@@ -340,3 +340,4 @@ src/donor/float2str.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/_ll_ufrom_d.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/CARDi_InitCommon.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
 src/auto/__pformatter.c 2.0/sp1p5 -O4,p -lang c99 -ipa file -inline on,noauto
+src/auto/func_020c8228.c 2.0/sp1p5 -thumb

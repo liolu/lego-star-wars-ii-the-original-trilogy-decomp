@@ -23107,3 +23107,11 @@ src/auto/__pformatter.c:
     complete
     .text       start:0x020e0240 end:0x020e0a64
 
+
+src/auto/func_020c8228.c:
+    complete
+    .text       start:0x020c8228 end:0x020c8244
+
+src/auto/func_02001d20.cpp:
+    complete
+    .text       start:0x02001d20 end:0x020029c4
