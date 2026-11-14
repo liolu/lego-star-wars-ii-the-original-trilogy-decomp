@@ -16745,6 +16745,10 @@ src/auto/func_02090a14.c:
 src/auto/func_020bb778.c:
     complete
     .text       start:0x020bb778 end:0x020bb84c
+src/auto/func_0202fcc8.cpp:
+    complete
+    .text       start:0x0202fcc8 end:0x0202ff38
+
 src/auto/func_02030540.c:
     complete
     .text       start:0x02030540 end:0x02030670
