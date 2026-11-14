@@ -4218,6 +4218,10 @@ src/auto/func_02063da0.c:
     complete
     .text       start:0x02063da0 end:0x02063df8
 
+src/auto/func_02063df8.c:
+    complete
+    .text       start:0x02063df8 end:0x02064564
+
 src/auto/func_02064564.c:
     complete
     .text       start:0x02064564 end:0x02064578
