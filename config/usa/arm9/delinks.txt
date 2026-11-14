@@ -11213,6 +11213,10 @@ src/auto/func_0202cc80.c:
     complete
     .text       start:0x0202cc80 end:0x0202cca0
 
+src/auto/func_02035cd0.c:
+    complete
+    .text       start:0x02035cd0 end:0x0203638c
+
 src/auto/func_0203638c.c:
     complete
     .text       start:0x0203638c end:0x020363b0
